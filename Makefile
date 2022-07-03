@@ -1,5 +1,5 @@
 CC      = gcc
-CFLAGS  = -Wall -Wextra -pedantic -o
+CFLAGS  = -pedantic -o
 INCLUDE = $(wildcard ./include/*.h)
 SRC     = $(wildcard ./src/*.c)
 OBJECT  = ntodo
