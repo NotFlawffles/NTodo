@@ -15,8 +15,8 @@ void add       (VM *vm, int argc, char **argv);
 void removes   (VM *vm, int argc, char **argv);
 void check     (VM *vm, int argc, char **argv);
 void uncheck   (VM *vm, int argc, char **argv);
-void dest      (VM *vm, int argc, char **argv);
+void dest      (VM *vm);
 void list      (VM *vm, int argc, char **argv);
-void update    (VM *vm, int argc, char **argv);
+void update    (VM *vm);
 
 #endif // NTODO_H

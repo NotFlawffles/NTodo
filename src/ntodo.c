@@ -75,7 +75,7 @@ void uncheck(VM *vm, int argc, char **argv) {
     }   
 }
 
-void dest(VM *vm, int argc, char **argv) {
+void dest(VM *vm) {
     printf("%s\n", vm->configurations->ntodoFilePath);
 }
 
@@ -118,12 +118,8 @@ void list(VM *vm, int argc, char **argv) {
     }
 }
 
-void update(VM *vm, int argc, char **argv) {
+void update(VM *vm) {
     clearFile(vm->configurations->ntodoFilePath);
-    if (argc > 2) {
-        printf("ntodo: update takes no arguments.\n");
-        exit(1);
-    }
     int removedCount = 0;
     for (int i = 0; vm->todos[i] != NULL; i++) {
         if (!vm->todos[i]->removable) writeFile(vm->configurations->ntodoFilePath, generate(vm->todos[i]));
