@@ -17,6 +17,11 @@ Ast **parse(Parser *parser) {
     Ast **compound = (Ast **) malloc(sizeof(Ast *));
     size_t size    = 0;
     while (parser->current->type != TOKEN_EOF) {
+        if (parser->current->type == TOKEN_NEWLINE) {
+            parser->line++;
+            eat(parser, TOKEN_NEWLINE);
+            continue;
+        }
         char *name        = parser->current->value;
         eat(parser, TOKEN_IDENTIFIER);
         if (parser->current->type == TOKEN_ASSIGN) {

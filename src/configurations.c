@@ -11,11 +11,16 @@
 Configurations *newConfiguarations(char *fileName) {
     Configurations *configs = (Configurations *) malloc(sizeof(Configurations));
     char *content           = readFile(fileName);
+    if (content == NULL) {
+        configs->ntodoFilePath = "/root/.ntodos";
+        configs->useRemoval    = false;
+        return configs;
+    }
     Lexer *lexer            = newLexer(content);
     Parser *parser          = newParser(lexer);
     Ast **ast               = parse(parser);
     for (int i = 0; ast[i] != NULL; i++) {
-        if (strcmp(ast[i]->name, "ntodo_src") == 0) {
+        if (strcmp(ast[i]->name, "todo_src") == 0) {
             configs->ntodoFilePath = ast[i]->description;
         } else if (strcmp(ast[i]->name, "use_removal") == 0) {
             if (strcmp(ast[i]->description, "true") == 0) {

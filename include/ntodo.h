@@ -10,6 +10,7 @@ typedef struct {
 
 VM *newVM(Configurations *configurations);
 Ast **readTodos(VM *vm);
+void usage(void);
 void add(VM *vm,     int argc, char **argv);
 void removes(VM *vm, int argc, char **argv);
 void check(VM *vm,   int argc, char **argv);
