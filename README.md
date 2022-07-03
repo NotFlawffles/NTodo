@@ -1,5 +1,8 @@
-![screenshot](https://i.ibb.co/rZNRL4n/IMG-20220703-204856.jpg)
+![screenshot1](https://i.ibb.co/rZNRL4n/IMG-20220703-204856.jpg)
 has another commands, `$ ntodo` to list them.
+
+this is how the `.ntodos` file looks like, which stores the TODOs in it
+![screenshot2](https://i.ibb.co/frJw8Br/IMG-20220703-205310.jpg)
 
 # Installation
 to install it into /usr/bin to be used anytime simply:
