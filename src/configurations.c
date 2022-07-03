@@ -10,12 +10,8 @@
 
 Configurations *newConfiguarations(char *fileName) {
     Configurations *configs = (Configurations *) malloc(sizeof(Configurations));
+    if (readFile(fileName) == NULL) fopen(fileName, "w");
     char *content           = readFile(fileName);
-    if (content == NULL) {
-        configs->ntodoFilePath = "/root/.ntodos";
-        configs->useRemoval    = false;
-        return configs;
-    }
     Lexer *lexer            = newLexer(content);
     Parser *parser          = newParser(lexer);
     Ast **ast               = parse(parser);

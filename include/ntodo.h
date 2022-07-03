@@ -8,15 +8,15 @@ typedef struct {
     Ast **todos;
 } VM;
 
-VM *newVM(Configurations *configurations);
+VM *newVM      (Configurations *configurations);
 Ast **readTodos(VM *vm);
-void usage(void);
-void add(VM *vm,     int argc, char **argv);
-void removes(VM *vm, int argc, char **argv);
-void check(VM *vm,   int argc, char **argv);
-void uncheck(VM *vm, int argc, char **argv);
-void dest(VM *vm,    int argc, char **argv);
-void list(VM *vm,    int argc, char **argv);
-void update(VM *vm,  int argc, char **argv);
+void usage     (void);
+void add       (VM *vm, int argc, char **argv);
+void removes   (VM *vm, int argc, char **argv);
+void check     (VM *vm, int argc, char **argv);
+void uncheck   (VM *vm, int argc, char **argv);
+void dest      (VM *vm, int argc, char **argv);
+void list      (VM *vm, int argc, char **argv);
+void update    (VM *vm, int argc, char **argv);
 
 #endif // NTODO_H

@@ -14,7 +14,7 @@ VM *newVM(Configurations *configurations) {
     VM *vm             = (VM *) malloc(sizeof(VM));
     vm->configurations = configurations;
     if (readFile(vm->configurations->ntodoFilePath) == NULL) {
-        fprintf(stderr, "ntodo: %s: todos file not found.\nmake a new todos file in the shown path or specify your own path to a `.ntodos` file. for more information run ntodo --help config\n", vm->configurations->ntodoFilePath);
+        printf("todo_src is not defined in `/root/.ntodo.conf` file.\nconsider assigning `todo_src` option to the todo source file path\n\nexample:\n\ttodo_src = \"/root/.config/.ntodos\"\n");
         exit(1);
     }
     vm->todos          = readTodos(vm);
