@@ -29,7 +29,15 @@ Ast **readTodos(VM *vm) {
 }
 
 void usage(void) {
-    printf("useage: ntodo [[add] <argument> <sub-argunent> | [remove | check | uncheck | update | list] <argumentS> | [update] | [list] | [list]]\n");
+    printf("available commands:\n\n");
+    printf("\tadd        -    add a todo\n");
+    printf("\tremove     -    remove a todo\n");
+    printf("\tcheck      -    check a todo\n");
+    printf("\tuncheck    -    uncheck a todo\n");
+    printf("\ttoggle     -    toggle a todo\n");
+    printf("\tupdate     -    update the todo list\n");
+    printf("\tlist       -    list todo(s)\n");
+    printf("\traw        -    prints a raw of todos\n\n");
     exit(1);
 }
 
@@ -56,6 +64,7 @@ void removes(VM *vm, int argc, char **argv) {
 }
 
 void check(VM *vm, int argc, char **argv) {
+    if (argc < 3) return;
     clearFile(vm->configurations->ntodoFilePath);
     for (int i = 2; i < argc; i++) {
         for (int j = 0; vm->todos[j]; j++) {
@@ -66,13 +75,28 @@ void check(VM *vm, int argc, char **argv) {
 }
 
 void uncheck(VM *vm, int argc, char **argv) {
+    if (argc < 3) return;
     clearFile(vm->configurations->ntodoFilePath);
     for (int i = 2; i < argc; i++) {
         for (int j = 0; vm->todos[j]; j++) {
             if (strcmp(vm->todos[j]->name, argv[i]) == 0 && vm->todos[j]->checked) vm->todos[j]->checked = false;
             writeFile(vm->configurations->ntodoFilePath, generate(vm->todos[j]));
         }
-    }   
+    }
+}
+
+void toggle(VM *vm, int argc, char **argv) {
+    if (argc < 3) return;
+    clearFile(vm->configurations->ntodoFilePath);
+    for (int i = 2; i < argc; i++) {
+        for (int j = 0; vm->todos[j]; j++) {
+            if (strcmp(argv[i], vm->todos[j]->name) == 0) {
+                if (vm->todos[j]->checked) vm->todos[j]->checked = false;
+                vm->todos[j]->checked = true;
+            }
+            writeFile(vm->configurations->ntodoFilePath, generate(vm->todos[j]));
+        }
+    }
 }
 
 void dest(VM *vm) {
@@ -126,4 +150,17 @@ void update(VM *vm) {
         else removedCount++;
     }
     printf("ntodo: successfully updated TODOs, %d TODOs has been removed.\n", removedCount);
+}
+
+void _raw(VM *vm) {
+    printf("[\n");
+    for (int i = 0; vm->todos[i]; i++) {    
+        printf("\t{ \"name\": \"%s\", \"description\": \"%s\", \"checked\": %d, \"removable\": %d }\n",
+                vm->todos[i]->name,
+                vm->todos[i]->description,
+                vm->todos[i]->checked,
+                vm->todos[i]->removable
+              );
+    }
+    printf("\n]\n");
 }

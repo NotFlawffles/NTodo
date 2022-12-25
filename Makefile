@@ -5,7 +5,7 @@ SRC     = $(wildcard ./src/*.c)
 OBJECT  = ntodo
 
 default: $(INCLUDE) $(SRC)
-	$(CC) $(CFLAGS) $(OBJECT) $(SRC)
+	$(CC) $(CFLAGS) $(OBJECT) $(SRC) -lncurses
 
 clean: $(OBJECT)
 	rm $(OBJECT)
